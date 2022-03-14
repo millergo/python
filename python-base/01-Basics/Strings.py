@@ -1,3 +1,8 @@
+"""
+每种语言对字符串的处理都是不一样的。Java中字符串被定义为一个 final class String类来保证字符串的处理逻辑一致性，内部使用final char value[]
+"""
+
+
 def run():
     literal = "Let's Go"
     print(literal)

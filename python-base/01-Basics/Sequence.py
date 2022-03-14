@@ -1,6 +1,8 @@
 """
 Python 数据结构：序列 \
 几乎在所有情况下都可使用列表来代替元组。一种例外情况是将元组用作字典键, 在这种情况下，不能使用列表来代替元组，因为字典键是不允许修改的. \
+序列感觉有点像Python中特有的概念，在Java中我们一般是使用数组或者集合来做索引的操作。
+- 通用序列操作：索引、 切片、 相加、 相乘和成员资格
 """
 
 
@@ -9,9 +11,10 @@ def test_sequence():
     person_mila = ["mila", 6]
     database = [person_miller, person_mila]
     print(database[0])
-
-    # 通用序列操作：索引、 切片、 相加、 相乘和成员资格
-    literal = 'Miller'  # 字符串就是由字符组成的序列
+    print(database[0][0])
+    
+    # 字符串就是由字符组成的序列
+    literal = 'Miller'
     print(literal[0])
     print(literal[-1])
 
@@ -104,7 +107,7 @@ def test_list():
     print("对列表就地排序,并返回列表:", sorted(scope))  # [20, 20, 30, 60, 70, 80]
 
 
-# 元组，不可修改的序列
+# 元组，不可修改的序列。类似于Java中的final。
 def test_tuples():
     t = 1,
     print("元组必须有逗号：", t)  # (1,)
@@ -122,8 +125,8 @@ def test_tuples():
 
 
 if __name__ == '__main__':
-    # test_sequence()
+    test_sequence()
     # test_check_value()
     # test_list()
 
-    test_tuples()
+    # test_tuples()
