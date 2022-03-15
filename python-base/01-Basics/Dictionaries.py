@@ -52,7 +52,9 @@ def test_clear_method():
 def test_copy_method():
     x = {"name": "Miller", "age": [30, 40]}
     y = x.copy()
+    print("address is :", id(x['name']), id(y['name']))
     y["name"] = "Mila"  # 需要执行修改，而不是赋值,替换是不会影响原先的值,所以可以看到x的name值没有变化，但是age却因为y的修改改变了
+    print(id("address is :", x['name']), id(y['name']))
     y["age"].remove(40)
     y["age"].remove(30)
     y["age"].append(50)

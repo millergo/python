@@ -78,6 +78,7 @@ def test_exec_method():
     exec("print('在字符串中执行Python代码')")
 
 
+# 将字符串作为Python代码执行。有点Java中的反射的意思。
 def test_eval_method():
     scope = {}
     scope["x"] = 2
