@@ -53,19 +53,22 @@ def test_copy_method():
     x = {"name": "Miller", "age": [30, 40]}
     y = x.copy()
     print("address is :", id(x['name']), id(y['name']))
+    print("copy()之后的值 :", x, y)
     y["name"] = "Mila"  # 需要执行修改，而不是赋值,替换是不会影响原先的值,所以可以看到x的name值没有变化，但是age却因为y的修改改变了
-    print(id("address is :", x['name']), id(y['name']))
-    y["age"].remove(40)
-    y["age"].remove(30)
-    y["age"].append(50)
+    y["age"] = y["age"].pop()
+    print("address is :", id(x['age']), id(y['age']))
+    # y["age"].remove(40)
+    # y["age"].remove(30)
+    # y["age"].append(50)
     print("浅拷贝修改副本，原件值也被更新了,x = ", x)  # {'name': 'Miller', 'age': [50]}
     print("浅拷贝修改副本，副本值修改之后,y = ", y)  # {'name': 'Mila', 'age': [50]}
     # x 的修改影响 y
-    x["age"].append(60)
-    print("浅拷贝两个值修改 互相影响 对方", x, y)  # {'name': 'Miller', 'age': [50, 60]} {'name': 'Mila', 'age': [50, 60]}
+    # x["age"].append(60)
+    # print("浅拷贝两个值修改 互相影响 对方", x, y)  # {'name': 'Miller', 'age': [50, 60]} {'name': 'Mila', 'age': [50, 60]}
+
+    # 深拷贝,独立的两份，互相不受影响
 
 
-# 深拷贝,独立的两份，互相不受影响
 def test_deep_copy_method():
     x = {"name": "Miller", "age": [30, 40]}
     y = deepcopy(x)
