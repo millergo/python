@@ -1,5 +1,5 @@
 """
-Flask是一个应用程序框架，它也实现了WSGI接口，让我们能更加轻松的编写我们的业务逻辑，而不需要关注WSGI接口。
+Flask是一个应用程序框架，它也实现了WSGI接口，让我们能更加轻松的编写我们的业务逻辑，而不需要关注WSGI协议。
 可以将Flask理解为Java中的Servlet、SpringMVC框架
 """
 from flask import Flask
