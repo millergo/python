@@ -1,5 +1,6 @@
 """
-Python内置了WSGI服务器模块wsgiref,可以用于启动WSGI服务器，加载application()函数
+Python内置了 WSGI服务器 模块wsgiref,可以用于启动 WSGI服务器 ，加载application()函数，但是这个模块只是做了一个最简单的实现，所以项目中一般不用。
+可以将 WSGI服务器 理解为Java中的Tomcat，因为我们编写的代码都需跑某个 WSGI服务器 上，WSGI服务器 实现了WSGI标准，从而实现对HTTP资源的各种操作。
 """
 from wsgiref.simple_server import make_server
 from WSGI import application
