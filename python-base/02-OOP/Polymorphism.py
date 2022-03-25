@@ -1,41 +1,74 @@
 """
-多态：
+多态:python中的多态主要是通过对象的属性来实现的，只要对象中含有"name"属性，它就可以作为参数传递，而并不会考虑对象的类型
 """
 
 
-# 类（class）的概念与Java中相同。
-class Person:
-    print("Person class invoked!")
+# 多态：其实就是看属性或者方法，有就可以调用，没有则不行
+class A:
+    def __init__(self, name):
+        # 使用双下划线定义隐藏属性,这样类的外部就没法直接访问，因为Python解析器会自动给双下划线属性自动重新命名为_A.__name
+        self.__name = name
 
-    # setXxx,getXxx可以理解为Java中的普通JavaBean。
-    def set_name(self, name):
-        # self，关键字它指向对象本身。可以理解为Java中的this，表示当前对象。 self.name可以理解为向这个类中添加一个成员变量，名称叫做name。
-        # 在Java中我们需要显示声明类的成员变量，而在Python中万物皆对象，所以可以直接通过 self.user_name 方式给对象添加属性。
-        self.user_name = name
+    # 使用装饰器@property来装饰方法为getter方法。注意：方法名称必须与属性名一致
+    @property
+    def name(self):
+        return self.__name
 
-    def get_name(self):
-        return self.user_name
-
-    # 方法和函数的区别在于方法有个self参数，self会关联到它所属的实例
-    def greet(self):
-        print("Hello, world! I'm {}.".format(self.user_name))
-
-    # 要让方法或属性成为私有的（不能从外部访问），只需让其名称以两个下划线打头即可.
-    # 原理：在类定义中，对所有以两个下划线打头的名称都进行转换，即在开头加上一个下划线和类名,比如 Person._Person__in_accessible(object)
-    # 如果完全不希望外部访问name就用一个下划线
-    def __in_accessible(self):
-        print("我是私有方法，只能在类内部访问，外部不能直接访问")
+    @name.setter
+    def name(self, name):
+        self.__name = name
 
 
-if __name__ == "__main__":
-    miller = Person()
-    # 调用对象时会将miller对象作为第一个参数自动传递给self
-    miller.set_name("Miller")
-    miller.greet()
+class B:
+    def __init__(self, name):
+        self.__name = name
 
-    mila = Person()
-    mila.set_name("Mila")
-    mila.greet()
-    print("直接可以访问这些属性:", miller.user_name)
-    # 访问私有属性或者方法的方法，不建议这么做
-    Person._Person__in_accessible(miller)
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, name):
+        self.__name = name
+
+
+class C:
+    pass
+
+
+# 定义一个方法接受一个对象，然后获取对象的name属性
+def say_hello(obj):
+    print('Hello:%s' % obj.name)
+
+
+def say_hello2(obj):
+    # 检查类型
+    if isinstance(obj, A) or isinstance(obj, B):
+        print('Hello:%s' % obj.name)
+    else:
+        print('不支持的类型:%s' % type(obj))
+
+
+# 创建对象
+object1 = A("Hi")
+# 给对象设置属性，相当于调用set_name方法
+object1.name = 'Tom'
+# 获取属性值，相当于调用get_name方法
+# print(object1.name)
+
+# 调用方法，传递对象1
+say_hello(object1)  # Hello:Tom
+object2 = B("Jerry")
+# 调用方法，传递对象2
+say_hello(object2)  # Hello:Jerry
+# 调用方法，传递对象3
+object3 = C()
+# say_hello(object3)  # AttributeError: 'C' object has no attribute 'name'
+'''
+    多态总结：对于def say_hello(obj):这个函数来说，只要对象中含有name属性，它就可以作为参数传递
+                这个函数并不会考虑对象的类型，只要有name属性即可
+'''
+print('======================================>')
+say_hello2(object1)  # Hello:Tom
+say_hello2(object2)  # Hello:Jerry
+say_hello2(object3)  # 不支持的类型:<class '__main__.C'>
