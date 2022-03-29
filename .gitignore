@@ -130,3 +130,4 @@ dmypy.json
 /python-base/.idea/
 *.class
 .idea
+test2.py
